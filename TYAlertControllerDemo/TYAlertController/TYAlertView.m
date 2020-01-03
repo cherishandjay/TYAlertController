@@ -61,7 +61,7 @@
 
 //image he 文字
 @property (nonatomic, weak) UIView *imagetextContentView;
-@property (nonatomic, weak) NSLayoutConstraint *imageTextTopConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *imageTextTopConstraint;
 @property (nonatomic, strong) UIImageView *descImageView;
 @property (nonatomic, strong) UILabel *descLabel;
 
@@ -98,11 +98,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         
-        [self configureProperty];
-        
-        [self addContentViews];
-        
-        [self addTextLabels];
+       
         
     }
     return self;
@@ -112,8 +108,11 @@
 {
     if (self = [self init]) {
         
-        _titleLable.text = title;
-        _messageLabel.text = message;
+        [self configureProperty];
+               
+        [self addContentViews];
+               
+        [self addTextLabels:title message:message];
         
     }
     return self;
@@ -200,23 +199,26 @@
     _buttonContentView = buttonContentView;
 }
 
-- (void)addTextLabels
+- (void)addTextLabels:(NSString*)title message:(NSString*)message
 {
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
     titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
     titleLabel.numberOfLines = 0;
+    titleLabel.text = title;
     [_textContentView addSubview:titleLabel];
     _titleLable = titleLabel;
-    
+
     UILabel *messageLabel = [[UILabel alloc]init];
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
     messageLabel.textColor = [UIColor lightGrayColor];
     [_textContentView addSubview:messageLabel];
+    messageLabel.text = message;
     _messageLabel = messageLabel;
+    
 }
 
 - (void)didMoveToSuperview
@@ -228,8 +230,9 @@
 //               [self layoutContentViews];
 //               [self layoutTextLabels];
 //           }
-           
-           [self layoutButtons];
+        if (_buttons.count) {
+            [self layoutButtons];
+        }
     }
 }
 
@@ -331,16 +334,17 @@
     // textContentView
     _textContentView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self addConstraintWithView:_textContentView topView:self leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(_contentViewSpace, _textLabelContentViewEdge, 0, -_textLabelContentViewEdge)];
+    [self addConstraintWithView:_textContentView topView:self leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake((_titleLable.text.length ||_messageLabel.text.length)?_contentViewSpace:0, _textLabelContentViewEdge, 0, -_textLabelContentViewEdge)];
     
     // textFieldContentView
     _textFieldContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    _textFieldTopConstraint = [self addConstraintWithTopView:_textContentView toBottomView:_textFieldContentView constant:_buttonContentViewTop];
+    //有子view再设置vertical padding.
+    _textFieldTopConstraint = [self addConstraintWithTopView:_textContentView toBottomView:_textFieldContentView constant:_textFieldContentView.subviews.count? (_buttonContentViewTop):0];
     
     [self addConstraintWithView:_textFieldContentView topView:nil leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, _textFieldContentViewEdge, 0, -_textFieldContentViewEdge)];
     
     _imagetextContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    _imageTextTopConstraint = [self addConstraintWithTopView:_textFieldContentView toBottomView:_imagetextContentView constant:_buttonContentViewTop];
+    _imageTextTopConstraint = [self addConstraintWithTopView:_textFieldContentView toBottomView:_imagetextContentView constant:self.imagetextContentView.subviews.count? (_buttonContentViewTop):0];
   
     [self addConstraintWithView:_imagetextContentView topView:nil leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, _textFieldContentViewEdge, 0, -_textFieldContentViewEdge)];
 
@@ -348,7 +352,7 @@
     // buttonContentView
     _buttonContentView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    _buttonTopConstraint = [self addConstraintWithTopView:_imagetextContentView toBottomView:_buttonContentView constant:_buttonContentViewTop];
+    _buttonTopConstraint = [self addConstraintWithTopView:_imagetextContentView toBottomView:_buttonContentView constant:0];
     
     [self addConstraintWithView:_buttonContentView topView:nil leftView:self bottomView:self rightView:self edgeInset:UIEdgeInsetsZero];
     
@@ -360,7 +364,7 @@
 
 - (void)layoutTextLabels
 {
-    if (!_titleLable.translatesAutoresizingMaskIntoConstraints && !_messageLabel.translatesAutoresizingMaskIntoConstraints) {
+    if (!_titleLable.translatesAutoresizingMaskIntoConstraints && _messageLabel.translatesAutoresizingMaskIntoConstraints) {
         // layout done
         return;
     }
@@ -370,7 +374,7 @@
     
     // message
     _messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [_textContentView addConstraintWithTopView:_titleLable toBottomView:_messageLabel constant:_textLabelSpace];
+    [_textContentView addConstraintWithTopView:_titleLable toBottomView:_messageLabel constant:(_titleLable.text.length && _messageLabel.text.length)? _textLabelSpace:0];
     [_textContentView addConstraintWithView:_messageLabel topView:nil leftView:_textContentView bottomView:_textContentView rightView:_textContentView edgeInset:UIEdgeInsetsZero];
 }
 
@@ -389,7 +393,7 @@
             previewBtn = obj;
         }
         
-        if (_buttons.count == 1) {
+        if (_buttons.count) {
             _buttonTopConstraint.constant = -_buttonContentViewTop;
         }
     }else{
@@ -437,7 +441,6 @@
           // layout done
           return;
       }
-    
       // title
     _descImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.imagetextContentView addConstraintWithView:self.descImageView topView:self.imagetextContentView leftView:self.imagetextContentView bottomView:nil rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
@@ -459,7 +462,6 @@
         _textFieldContentView.layer.cornerRadius = 4;
         _textFieldContentView.layer.borderWidth = _textFieldBorderWidth;
         _textFieldContentView.layer.borderColor = _textFieldBorderColor.CGColor;
-        _textFieldTopConstraint.constant = -_contentViewSpace;
         [_textFieldContentView addConstraintToView:textField edgeInset:UIEdgeInsetsMake(_textFieldBorderWidth, _textFieldEdge, -_textFieldBorderWidth, -_textFieldEdge)];
         [textField addConstraintWidth:0 height:_textFieldHeight];
     }else {

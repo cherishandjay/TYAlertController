@@ -29,27 +29,25 @@
 
 - (IBAction)showAlertViewAction:(id)sender {
     
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"标题" message:@"标题征文问"];
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"发现新设备" message:@"局域网内有很多个设备域网内有很多个设备域网内有很多个设备"];
     
     alertView.alertBtnStyle = LHAlertBtnStyleHorizontal;
     
-//    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
-//        NSLog(@"%@",action.title);
-//    }]];
     
-//    [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-//           NSLog(@"%@",action.title);
-//       }]];
+    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
+        NSLog(@"%@",action.title);
+    }]];
+   
 
     // 弱引用alertView 否则 会循环引用
-    __typeof (alertView) __weak weakAlertView = alertView;
-    [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
-
-        NSLog(@"%@",action.title);
-        for (UITextField *textField in weakAlertView.textFieldArray) {
-            NSLog(@"%@",textField.text);
-        }
-    }]];
+//    __typeof (alertView) __weak weakAlertView = alertView;
+//    [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+//
+//        NSLog(@"%@",action.title);
+//        for (UITextField *textField in weakAlertView.textFieldArray) {
+//            NSLog(@"%@",textField.text);
+//        }
+//    }]];
     
 //    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
 //        textField.placeholder = @"请输入账号";
@@ -58,10 +56,12 @@
 //        textField.placeholder = @"请输入密码";
 //    }];
     
-//    [alertView addImage:@"Snip" andDescString:@"文字说明"];
-    
+    [alertView addImage:@"Snip" andDescString:@"文字说明"];
+//    [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+//              NSLog(@"%@",action.title);
+//          }]];
     // first way to show
-    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleActionSheet];
     alertController.backgoundTapDismissEnable = YES;
     
     [alertController setViewWillShowHandler:^(UIView *alertView) {
