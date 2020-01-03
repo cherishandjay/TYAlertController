@@ -16,6 +16,7 @@
 		B0873F0D1BD370C700D2F4D5 /* TYShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B0873F0C1BD370C700D2F4D5 /* TYShowAlertView.m */; };
 		B08FD7D01BD905EF00B83FF5 /* screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B08FD7CF1BD905EF00B83FF5 /* screen.jpg */; };
 		B0D617E41BDF9C5D0084EE84 /* TYAlertDropDownAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D617E31BDF9C5D0084EE84 /* TYAlertDropDownAnimation.m */; };
+		BD85F43A23BF4CDF00AFDEFF /* Snip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD85F43923BF4CDE00AFDEFF /* Snip@2x.png */; };
 		D35854241B9532D700B5FA1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D35854231B9532D700B5FA1F /* main.m */; };
 		D35854271B9532D700B5FA1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D35854261B9532D700B5FA1F /* AppDelegate.m */; };
 		D358542A1B9532D700B5FA1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35854291B9532D700B5FA1F /* ViewController.m */; };
@@ -59,6 +60,7 @@
 		B08FD7CF1BD905EF00B83FF5 /* screen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = screen.jpg; sourceTree = "<group>"; };
 		B0D617E21BDF9C5D0084EE84 /* TYAlertDropDownAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertDropDownAnimation.h; sourceTree = "<group>"; };
 		B0D617E31BDF9C5D0084EE84 /* TYAlertDropDownAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertDropDownAnimation.m; sourceTree = "<group>"; };
+		BD85F43923BF4CDE00AFDEFF /* Snip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Snip@2x.png"; sourceTree = "<group>"; };
 		D358541E1B9532D700B5FA1F /* TYAlertControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TYAlertControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35854221B9532D700B5FA1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D35854231B9532D700B5FA1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				D3C1A9721B9D16D5009738B0 /* UIView+TYAlertView.m */,
 				D37A91DF1B9E7B6000C6661A /* UIView+TYAutoLayout.h */,
 				D37A91E01B9E7B6000C6661A /* UIView+TYAutoLayout.m */,
+				BD85F43923BF4CDE00AFDEFF /* Snip@2x.png */,
 				D3C1A9741B9D1A83009738B0 /* TYAlertView.h */,
 				D3C1A9751B9D1A83009738B0 /* TYAlertView.m */,
 			);
@@ -285,7 +288,7 @@
 				TargetAttributes = {
 					D358541D1B9532D700B5FA1F = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = ZW52Q3KXX4;
+						DevelopmentTeam = 7Z44G3Z4UU;
 					};
 					D35854361B9532D700B5FA1F = {
 						CreatedOnToolsVersion = 6.4;
@@ -298,6 +301,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -321,6 +325,7 @@
 				B08FD7D01BD905EF00B83FF5 /* screen.jpg in Resources */,
 				B01449081BDE5817009E0389 /* ShareView.xib in Resources */,
 				D35854321B9532D700B5FA1F /* LaunchScreen.xib in Resources */,
+				BD85F43A23BF4CDF00AFDEFF /* Snip@2x.png in Resources */,
 				B01448F21BDE4690009E0389 /* SettingModelView.xib in Resources */,
 				D358542F1B9532D700B5FA1F /* Images.xcassets in Resources */,
 			);
@@ -488,6 +493,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7Z44G3Z4UU;
 				INFOPLIST_FILE = TYAlertControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -503,6 +509,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 7Z44G3Z4UU;
 				INFOPLIST_FILE = TYAlertControllerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

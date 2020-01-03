@@ -42,9 +42,13 @@
 
 - (NSLayoutConstraint *)addConstraintWithTopView:(UIView *)topView toBottomView:(UIView *)bottomView constant:(CGFloat)constant
 {
-    NSLayoutConstraint *topBottomConstraint =[NSLayoutConstraint constraintWithItem:topView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:bottomView attribute:NSLayoutAttributeTop multiplier:1 constant:-constant];
-    [self addConstraint:topBottomConstraint];
-    return topBottomConstraint;
+    if (topView && bottomView) {
+        NSLayoutConstraint *topBottomConstraint =[NSLayoutConstraint constraintWithItem:topView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:bottomView attribute:NSLayoutAttributeTop multiplier:1 constant:-constant];
+           [self addConstraint:topBottomConstraint];
+           return topBottomConstraint;
+    }
+    return nil;
+   
 }
 
 - (void)addConstraintWidth:(CGFloat)width height:(CGFloat)height

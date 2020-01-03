@@ -9,10 +9,16 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSUInteger, TYAlertActionStyle) {
-    TYAlertActionStyleDefault,
+    TYAlertActionStyleDefault,//black
     TYAlertActionStyleCancel,
-    TYAlertActionStyleDestructive,
+    TYAlertActionStyleDestructive,//blue
 };
+
+typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
+    LHAlertBtnStyleHorizontal,//一个按钮一行
+    LHAlertBtnStyleVertical,//black
+};
+
 
 @interface TYAlertAction : NSObject <NSCopying>
 
@@ -33,8 +39,12 @@ typedef NS_ENUM(NSUInteger, TYAlertActionStyle) {
 // alertView textfield array
 @property (nonatomic, strong, readonly) NSArray *textFieldArray;
 
-// default 280, if 0 don't add width constraint,
+
 @property (nonatomic, assign) CGFloat alertViewWidth;
+
+
+// default LHAlertBtnStyleVertical
+@property (nonatomic, assign) LHAlertBtnStyle  alertBtnStyle;
 
 // contentView space custom
 @property (nonatomic, assign) CGFloat contentViewSpace;

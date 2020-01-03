@@ -58,6 +58,14 @@
 @property (nonatomic, strong) NSMutableArray *textFields;
 @property (nonatomic, strong) NSMutableArray *textFieldSeparateViews;
 
+
+//image he 文字
+@property (nonatomic, weak) UIView *imagetextContentView;
+@property (nonatomic, weak) NSLayoutConstraint *imageTextTopConstraint;
+@property (nonatomic, strong) UIImageView *descImageView;
+@property (nonatomic, strong) UILabel *descLabel;
+
+
 // button content View
 @property (nonatomic, weak) UIView *buttonContentView;
 @property (nonatomic, weak) NSLayoutConstraint *buttonTopConstraint;
@@ -122,6 +130,8 @@
 {
     _clickedAutoHide = YES;
     self.backgroundColor = [UIColor whiteColor];
+    
+    _alertBtnStyle = LHAlertBtnStyleVertical;
     _alertViewWidth = kAlertViewWidth;
     _contentViewSpace = kContentViewSpace;
     
@@ -134,9 +144,9 @@
     _buttonContentViewTop = kContentViewSpace;
     _buttonCornerRadius = 4.0;
     _buttonFont = [UIFont fontWithName:@"HelveticaNeue" size:18];
-    _buttonDefaultBgColor = [UIColor colorWithRed:52/255.0 green:152/255.0 blue:219/255.0 alpha:1];
-    _buttonCancelBgColor = [UIColor colorWithRed:127/255.0 green:140/255.0 blue:141/255.0 alpha:1];
-    _buttonDestructiveBgColor = [UIColor colorWithRed:231/255.0 green:76/255.0 blue:60/255.0 alpha:1];
+    _buttonDefaultBgColor = [UIColor blackColor];
+    _buttonCancelBgColor = [UIColor lightGrayColor];
+    _buttonDestructiveBgColor = [UIColor blueColor];
     
     _textFieldHeight = kTextFieldHeight;
     _textFieldEdge = kTextFieldEdge;
@@ -178,8 +188,14 @@
     [self addSubview:textFieldContentView];
     _textFieldContentView = textFieldContentView;
     
+    UIView *imageDescContentView = [[UIView alloc]init];
+    [self addSubview:imageDescContentView];
+    _imagetextContentView = imageDescContentView;
+    
     UIView *buttonContentView = [[UIView alloc]init];
     buttonContentView.userInteractionEnabled = YES;
+//    buttonContentView.layer.borderColor = [UIColor blackColor].CGColor;
+//    buttonContentView.layer.borderWidth = 1/[UIScreen mainScreen].scale;
     [self addSubview:buttonContentView];
     _buttonContentView = buttonContentView;
 }
@@ -188,8 +204,9 @@
 {
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:18];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
     titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    titleLabel.numberOfLines = 0;
     [_textContentView addSubview:titleLabel];
     _titleLable = titleLabel;
     
@@ -197,7 +214,7 @@
     messageLabel.numberOfLines = 0;
     messageLabel.textAlignment = NSTextAlignmentCenter;
     messageLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
-    messageLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    messageLabel.textColor = [UIColor lightGrayColor];
     [_textContentView addSubview:messageLabel];
     _messageLabel = messageLabel;
 }
@@ -207,33 +224,60 @@
     if (self.superview) {
         [self layoutContentViews];
         [self layoutTextLabels];
+//        if (_buttons.count == 1) {
+//               [self layoutContentViews];
+//               [self layoutTextLabels];
+//           }
+           
+           [self layoutButtons];
     }
 }
 
 - (void)addAction:(TYAlertAction *)action
 {
+    
+    if (self.alertBtnStyle == LHAlertBtnStyleHorizontal && _buttons.count >=2 ) {
+        return;
+    }
+    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.clipsToBounds = YES;
-    button.layer.cornerRadius = _buttonCornerRadius;
     [button setTitle:action.title forState:UIControlStateNormal];
-    button.titleLabel.font = _buttonFont;
-    button.backgroundColor = [self buttonBgColorWithStyle:action.style];
+    button.titleLabel.font = [UIFont systemFontOfSize:16];
+//    button.backgroundColor = [self buttonBgColorWithStyle:action.style];
+    [button setBackgroundColor:[UIColor whiteColor]];
     button.enabled = action.enabled;
     button.tag = kButtonTagOffset + _buttons.count;
     button.translatesAutoresizingMaskIntoConstraints = NO;
+    [button setTitleColor:[self buttonBgColorWithStyle:action.style] forState:UIControlStateNormal];
+    button.layer.borderWidth = 1/[UIScreen mainScreen].scale;
+    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
     [button addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [_buttonContentView addSubview:button];
     [_buttons addObject:button];
     [_actions addObject:action];
     
-    if (_buttons.count == 1) {
-        [self layoutContentViews];
-        [self layoutTextLabels];
-    }
-    
-    [self layoutButtons];
 }
+
+- (void)addImage:(NSString*)imageName andDescString:(NSString*)desc
+{
+    self.descImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
+    [_imagetextContentView addSubview:self.descImageView];
+
+    UILabel *titleLabel = [[UILabel alloc]init];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+    titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    titleLabel.numberOfLines = 0;
+    [_imagetextContentView addSubview:titleLabel];
+    _descLabel = titleLabel;
+    _descLabel.text = desc;
+    
+    [self layoutImageAndDesc];
+}
+
+
 
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *textField))configurationHandler
 {
@@ -291,16 +335,29 @@
     
     // textFieldContentView
     _textFieldContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    _textFieldTopConstraint = [self addConstraintWithTopView:_textContentView toBottomView:_textFieldContentView constant:0];
+    _textFieldTopConstraint = [self addConstraintWithTopView:_textContentView toBottomView:_textFieldContentView constant:_buttonContentViewTop];
     
     [self addConstraintWithView:_textFieldContentView topView:nil leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, _textFieldContentViewEdge, 0, -_textFieldContentViewEdge)];
+    
+    _imagetextContentView.translatesAutoresizingMaskIntoConstraints = NO;
+    _imageTextTopConstraint = [self addConstraintWithTopView:_textFieldContentView toBottomView:_imagetextContentView constant:_buttonContentViewTop];
+  
+    [self addConstraintWithView:_imagetextContentView topView:nil leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, _textFieldContentViewEdge, 0, -_textFieldContentViewEdge)];
+
     
     // buttonContentView
     _buttonContentView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    _buttonTopConstraint = [self addConstraintWithTopView:_textFieldContentView toBottomView:_buttonContentView constant:_buttonContentViewTop];
+    _buttonTopConstraint = [self addConstraintWithTopView:_imagetextContentView toBottomView:_buttonContentView constant:_buttonContentViewTop];
     
-    [self addConstraintWithView:_buttonContentView topView:nil leftView:self bottomView:self rightView:self edgeInset:UIEdgeInsetsMake(0, _buttonContentViewEdge, -_contentViewSpace, -_buttonContentViewEdge)];
+    [self addConstraintWithView:_buttonContentView topView:nil leftView:self bottomView:self rightView:self edgeInset:UIEdgeInsetsZero];
+    
+    
+    //设置圆角
+    self.layer.cornerRadius = 10.0f;
+    self.layer.masksToBounds = YES;
+    
+    
 }
 
 - (void)layoutTextLabels
@@ -321,35 +378,67 @@
 
 - (void)layoutButtons
 {
-    UIButton *button = _buttons.lastObject;
-    if (_buttons.count == 1) {
-        _buttonTopConstraint.constant = -_buttonContentViewTop;
-        [_buttonContentView addConstraintToView:button edgeInset:UIEdgeInsetsZero];
-        [button addConstraintWidth:0 height:_buttonHeight];
-    }else if (_buttons.count == 2) {
-        UIButton *firstButton = _buttons.firstObject;
-        [_buttonContentView removeConstraintWithView:firstButton attribute:NSLayoutAttributeRight];
-        [_buttonContentView addConstraintWithView:button topView:_buttonContentView leftView:nil bottomView:nil rightView:_buttonContentView edgeInset:UIEdgeInsetsZero];
-        [_buttonContentView addConstraintWithLeftView:firstButton toRightView:button constant:_buttonSpace];
-        [_buttonContentView addConstraintEqualWithView:button widthToView:firstButton heightToView:firstButton];
-    }else {
-        if (_buttons.count == 3) {
-            UIButton *firstBtn = _buttons[0];
-            UIButton *secondBtn = _buttons[1];
-            [_buttonContentView removeConstraintWithView:firstBtn attribute:NSLayoutAttributeRight];
-            [_buttonContentView removeConstraintWithView:firstBtn attribute:NSLayoutAttributeBottom];
-            [_buttonContentView removeConstraintWithView:secondBtn attribute:NSLayoutAttributeTop];
-            [_buttonContentView addConstraintWithView:firstBtn topView:nil leftView:nil bottomView:nil rightView:_buttonContentView edgeInset:UIEdgeInsetsZero];
-            [_buttonContentView addConstraintWithTopView:firstBtn toBottomView:secondBtn constant:_buttonSpace];
-            
+    if (self.alertBtnStyle == LHAlertBtnStyleVertical) {
+        UIButton* previewBtn = nil;
+        __weak typeof(self) weakself = self;
+        
+        for (int i = 0; i< _buttons.count ; i++) {
+            UIButton* obj = _buttons[i];
+            BOOL isLast = (i == (_buttons.count-1));
+            [weakself.buttonContentView addConstraintWithView:obj topView:previewBtn?nil:self.buttonContentView leftView:weakself.buttonContentView bottomView:isLast?weakself.buttonContentView:nil  rightView:weakself.buttonContentView edgeInset:UIEdgeInsetsZero];
+            [weakself.buttonContentView addConstraintWithTopView:previewBtn?previewBtn:nil toBottomView:obj constant:-1];
+            [obj addConstraintWidth:0 height:_buttonHeight];
+            previewBtn = obj;
         }
         
-        UIButton *lastSecondBtn = _buttons[_buttons.count - 2];
-        [_buttonContentView removeConstraintWithView:lastSecondBtn attribute:NSLayoutAttributeBottom];
-        [_buttonContentView addConstraintWithTopView:lastSecondBtn toBottomView:button constant:_buttonSpace];
-        [_buttonContentView addConstraintWithView:button topView:nil leftView:_buttonContentView bottomView:_buttonContentView rightView:_buttonContentView edgeInset:UIEdgeInsetsZero];
-        [_buttonContentView addConstraintEqualWithView:button widthToView:nil heightToView:lastSecondBtn];
+        if (_buttons.count == 1) {
+            _buttonTopConstraint.constant = -_buttonContentViewTop;
+        }
+    }else{
+        
+        UIButton *button = _buttons.lastObject;
+        if (_buttons.count == 1) {
+            _buttonTopConstraint.constant = -_buttonContentViewTop;
+            [_buttonContentView addConstraintToView:button edgeInset:UIEdgeInsetsZero];
+            [button addConstraintWidth:0 height:_buttonHeight];
+        }else if (_buttons.count >= 2) {
+            UIButton *firstButton = _buttons.firstObject;
+            _buttonTopConstraint.constant = -_buttonContentViewTop;
+            [_buttonContentView addConstraintToView:firstButton edgeInset:UIEdgeInsetsZero];
+            [firstButton addConstraintWidth:0 height:_buttonHeight];
+            [_buttonContentView removeConstraintWithView:firstButton attribute:NSLayoutAttributeRight];
+            [_buttonContentView addConstraintWithView:button topView:_buttonContentView leftView:nil bottomView:nil rightView:_buttonContentView edgeInset:UIEdgeInsetsZero];
+            [_buttonContentView addConstraintWithLeftView:firstButton toRightView:button constant:-1];
+            [_buttonContentView addConstraintEqualWithView:button widthToView:firstButton heightToView:firstButton];
+        }else {
+            if (_buttons.count == 3) {
+                UIButton *firstBtn = _buttons[0];
+                UIButton *secondBtn = _buttons[1];
+                [_buttonContentView removeConstraintWithView:firstBtn attribute:NSLayoutAttributeRight];
+                [_buttonContentView removeConstraintWithView:firstBtn attribute:NSLayoutAttributeBottom];
+                [_buttonContentView removeConstraintWithView:secondBtn attribute:NSLayoutAttributeTop];
+                [_buttonContentView addConstraintWithView:firstBtn topView:nil leftView:nil bottomView:nil rightView:_buttonContentView edgeInset:UIEdgeInsetsZero];
+                [_buttonContentView addConstraintWithTopView:firstBtn toBottomView:secondBtn constant:_buttonSpace];
+                
+            }
+            
+            UIButton *lastSecondBtn = _buttons[_buttons.count - 2];
+            [_buttonContentView removeConstraintWithView:lastSecondBtn attribute:NSLayoutAttributeBottom];
+            [_buttonContentView addConstraintWithTopView:lastSecondBtn toBottomView:button constant:_buttonSpace];
+            [_buttonContentView addConstraintWithView:button topView:nil leftView:_buttonContentView bottomView:_buttonContentView rightView:_buttonContentView edgeInset:UIEdgeInsetsZero];
+            [_buttonContentView addConstraintEqualWithView:button widthToView:nil heightToView:lastSecondBtn];
+        }
     }
+}
+
+
+- (void)layoutImageAndDesc
+{
+    [self.imagetextContentView addConstraintWithView:self.descImageView topView:self.imagetextContentView leftView:self.imagetextContentView bottomView:nil rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.imagetextContentView addConstraintWithView:self.descLabel topView:nil leftView:self.imagetextContentView bottomView:self.imagetextContentView rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.imagetextContentView addConstraintWithTopView:self.descImageView toBottomView:self.descLabel constant:0];
+    
+    
 }
 
 - (void)layoutTextFields

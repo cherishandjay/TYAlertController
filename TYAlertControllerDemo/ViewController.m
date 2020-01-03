@@ -29,16 +29,22 @@
 
 - (IBAction)showAlertViewAction:(id)sender {
     
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"TYAlertView" message:@"This is a message, the alert view containt text and textfiled. "];
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"弹框主标题" message:@"弹框内容，一行居中,如果很长的话，弹框内容，一行居中,如果很长"];
+    
+    alertView.alertBtnStyle = LHAlertBtnStyleHorizontal;
     
     [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
         NSLog(@"%@",action.title);
     }]];
     
+    [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
+           NSLog(@"%@",action.title);
+       }]];
+
     // 弱引用alertView 否则 会循环引用
     __typeof (alertView) __weak weakAlertView = alertView;
     [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
-        
+
         NSLog(@"%@",action.title);
         for (UITextField *textField in weakAlertView.textFieldArray) {
             NSLog(@"%@",textField.text);
@@ -48,9 +54,9 @@
     [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
         textField.placeholder = @"请输入账号";
     }];
-    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"请输入密码";
-    }];
+//    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+//        textField.placeholder = @"请输入密码";
+//    }];
     
     // first way to show
     TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
