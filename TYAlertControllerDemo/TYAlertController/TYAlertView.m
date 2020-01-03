@@ -268,7 +268,7 @@
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-    titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    titleLabel.textColor = [UIColor grayColor];
     titleLabel.numberOfLines = 0;
     [_imagetextContentView addSubview:titleLabel];
     _descLabel = titleLabel;
@@ -356,8 +356,6 @@
     //设置圆角
     self.layer.cornerRadius = 10.0f;
     self.layer.masksToBounds = YES;
-    
-    
 }
 
 - (void)layoutTextLabels
@@ -434,11 +432,20 @@
 
 - (void)layoutImageAndDesc
 {
+    
+    if (!self.descImageView.translatesAutoresizingMaskIntoConstraints && !self.descLabel.translatesAutoresizingMaskIntoConstraints) {
+          // layout done
+          return;
+      }
+    
+      // title
+    _descImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.imagetextContentView addConstraintWithView:self.descImageView topView:self.imagetextContentView leftView:self.imagetextContentView bottomView:nil rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    [self.imagetextContentView addConstraintWithView:self.descLabel topView:nil leftView:self.imagetextContentView bottomView:self.imagetextContentView rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     [self.imagetextContentView addConstraintWithTopView:self.descImageView toBottomView:self.descLabel constant:0];
-    
-    
+
+    _descLabel.translatesAutoresizingMaskIntoConstraints = NO;
+
+    [self.imagetextContentView addConstraintWithView:self.descLabel topView:nil leftView:self.imagetextContentView bottomView:self.imagetextContentView rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
 }
 
 - (void)layoutTextFields

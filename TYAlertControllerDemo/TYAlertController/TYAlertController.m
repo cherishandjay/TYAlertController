@@ -218,7 +218,7 @@
     _backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     _backgoundTapDismissEnable = NO;
     _alertStyleEdging = 15;
-    _actionSheetStyleEdging = 0;
+    _actionSheetStyleEdging = 15;
 }
 
 - (void)configureAlertView
@@ -295,7 +295,7 @@
     }
     
     // add edge constraint
-    [self.view addConstraintWithView:_alertView topView:nil leftView:self.view bottomView:self.view rightView:self.view edgeInset:UIEdgeInsetsMake(0, _actionSheetStyleEdging, 0, -_actionSheetStyleEdging)];
+    [self.view addConstraintWithView:_alertView topView:nil leftView:self.view bottomView:self.view rightView:self.view edgeInset:UIEdgeInsetsMake(0, _actionSheetStyleEdging, -_actionSheetStyleEdging, -_actionSheetStyleEdging)];
     
     if (CGRectGetHeight(_alertView.frame) > 0) {
         // height

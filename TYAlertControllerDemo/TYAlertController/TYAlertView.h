@@ -82,4 +82,6 @@ typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
 
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *textField))configurationHandler;
 
+- (void)addImage:(NSString*)imageName andDescString:(NSString*)desc;
+
 @end
