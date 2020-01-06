@@ -215,8 +215,16 @@
     [_textContentView addSubview:titleLabel];
     _titleLable = titleLabel;
 
-    _messageAttributeString = [[NSMutableAttributedString alloc]initWithString:message];
-//    [self.messageAttributeString addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineSpacing = 1;// 字体的行间距
+    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraphStyle.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    _messageAttributeString = [[NSMutableAttributedString alloc]initWithString:message attributes:attributes];
 
     
     UITextView *messageLabel = [[UITextView alloc]init];
@@ -225,6 +233,7 @@
     messageLabel.scrollEnabled = NO;   // 可选的，视具体情况而定
     messageLabel.linkTextAttributes = @{NSForegroundColorAttributeName:[UIColor redColor]};
     messageLabel.textContainer.lineFragmentPadding = 0;
+    messageLabel.textAlignment = NSTextAlignmentCenter;
 //    messageLabel.textContainerInset = UIEdgeInsetsMake(15, 0, 0, 0);
 //    messageLabel.numberOfLines = 0;
 //    messageLabel.textAlignment = NSTextAlignmentCenter;
@@ -233,6 +242,7 @@
     [_textContentView addSubview:messageLabel];
     messageLabel.attributedText = _messageAttributeString;
     _messageLabel = messageLabel;
+     [_messageLabel addObserver:self forKeyPath:@"contentSize"options:NSKeyValueObservingOptionNew context:nil];
 
 }
 
@@ -251,6 +261,21 @@
         }
     }
 }
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"contentSize"])
+    {
+        UITextView *tv = object;
+        CGFloat deadSpace = ([tv bounds].size.height - [tv contentSize].height);
+        CGFloat inset = MAX(0, deadSpace/2.0);
+        tv.contentInset = UIEdgeInsetsMake(inset, tv.contentInset.left, inset, tv.contentInset.right);
+    }
+
+}
+
+
+
 
 - (void)addAction:(TYAlertAction *)action
 {
@@ -536,10 +561,14 @@
     }
 }
 
-//- (void)dealloc
-//{
-//    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
-//}
+- (void)dealloc
+{
+    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
+
+    [self.messageLabel removeObserver:self forKeyPath:@"contentSize"];
+}
+
+
 
 
 @end

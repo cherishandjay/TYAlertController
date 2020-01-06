@@ -291,6 +291,7 @@
         if (constraint.firstAttribute == NSLayoutAttributeWidth) {
             [_alertView removeConstraint: constraint];
             break;
+            
         }
     }
     

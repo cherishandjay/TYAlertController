@@ -16,6 +16,8 @@
 #import "ShareView.h"
 #import "TYAlertView.h"
 #import "OptionView.h"
+#import "IntroductionView.h"
+
 
 @interface ViewController ()
 
@@ -41,11 +43,11 @@
     [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
         NSLog(@"%@",action.title);
     }]];
-    NSRange range = [message rangeOfString:@"很多"];
-    [alertView addClickRange:range andhandle:^(NSString *string) {
-        NSLog(@"点击了---%@",string);
-
-    }];
+//    NSRange range = [message rangeOfString:@"很多"];
+//    [alertView addClickRange:range andhandle:^(NSString *string) {
+//        NSLog(@"点击了---%@",string);
+//
+//    }];
 //     range = [message rangeOfString:@"设备域网"];
 //    [alertView addClickRange:range andhandle:^(NSString *string) {
 //           NSLog(@"点击了---%@",string);
@@ -68,7 +70,7 @@
 //        textField.placeholder = @"请输入密码";
 //    }];
     
-    [alertView addImage:@"Snip" andDescString:@"文字说明"];
+    [alertView addImage:@"Snip" andDescString:@""];
 //    [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
 //              NSLog(@"%@",action.title);
 //          }]];
@@ -117,8 +119,15 @@
 }
 
 - (IBAction)blurEffectAlertViewAction:(id)sender {
-    ShareView *shareView = [ShareView createViewFromNib];
-    
+//    ShareView *shareView = [ShareView createViewFromNib];
+//
+    IntroductionView* shareView = [IntroductionView alertViewWithTitle:@"新版本可支持米家" imageName:@"Snip" buttonName:@"前往" handler:^(NSInteger isBottomBtn) {
+        if (isBottomBtn) {
+            NSLog(@"点击了前往");
+        }else{
+            NSLog(@"点击了关闭");
+        }
+    }];
     TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
     
     // blur effect

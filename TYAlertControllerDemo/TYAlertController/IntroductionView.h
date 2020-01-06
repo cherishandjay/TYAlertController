@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface IntroductionView : UIView
 
++ (instancetype)alertViewWithTitle:(NSString *)title imageName:(NSString*)imageName buttonName:(NSString*)btnName handler:(void (^)(NSInteger isBottomBtn))handler;
+
 @end
 
 NS_ASSUME_NONNULL_END

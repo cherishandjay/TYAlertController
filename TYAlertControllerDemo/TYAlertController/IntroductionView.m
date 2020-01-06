@@ -22,8 +22,6 @@
 
 @property (nonatomic, strong)UIButton *bottomButton;
 
-@property (nonatomic, assign)NSInteger selectedIndex;
-
 @property (nonatomic, copy) void (^handler)(NSInteger isBottomBtn);
 
 @end
@@ -68,13 +66,10 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
     titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
-    titleLabel.layer.borderWidth = 1/[UIScreen mainScreen].scale;
-    titleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
     titleLabel.numberOfLines = 0;
     titleLabel.text = title;
     [self addSubview:titleLabel];
     _messageLabel = titleLabel;
-    
     
     button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:btnName forState:UIControlStateNormal];
@@ -84,31 +79,35 @@
     button.translatesAutoresizingMaskIntoConstraints = NO;
     [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    button.layer.borderWidth = 1/[UIScreen mainScreen].scale;
+    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _bottomButton = button;
     [self addSubview:button];
-    
 }
 
 
 - (void)layoutContentViews
 {
+    _righButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self addConstraintWithView:self.righButton topView:self leftView:nil bottomView:nil rightView:self edgeInset:UIEdgeInsetsZero];
-    
-    [self addConstraintWithView:self.imagView topView:nil leftView:self  bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, 50, 0, 50)];
+    [_righButton addConstraintWidth:KButtonHeight height:KButtonHeight];
 
-    
-    [self addConstraintWithView:self.messageLabel topView:nil leftView:self  bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, 50, 0, 50)];
-
-    [self addConstraintWithView:self.imagView topView:nil leftView:self  bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, 50, 0, 50)];
+    _imagView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addConstraintCenterXToView:self.imagView centerYToView:nil];
+    [self addConstraintWithTopView:_righButton toBottomView:_imagView constant:KButtonHeight/2];
+    [_messageLabel addConstraintWidth:KButtonHeight*2 height:KButtonHeight*2];
 
     _messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [self addConstraintWithView:_messageLabel topView:self leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsZero];
+    [self addConstraintWithTopView:self.imagView toBottomView:_messageLabel constant:KButtonHeight/2];
+    [self addConstraintWithView:self.messageLabel topView:nil leftView:self  bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
     [_messageLabel addConstraintWidth:0 height:KButtonHeight];
-
-//    _buttonContentView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    _bottomButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addConstraintWithTopView:self.messageLabel toBottomView:_bottomButton constant:KButtonHeight/2];
+    [self addConstraintWithView:_bottomButton topView:nil leftView:self bottomView:self rightView:self edgeInset:UIEdgeInsetsZero];
+    [_bottomButton addConstraintWidth:0 height:KButtonHeight];
 
     
-
     //设置圆角
     self.layer.cornerRadius = 10.0f;
     self.layer.masksToBounds = YES;
@@ -144,13 +143,13 @@
 
 - (void)didMoveToSuperview
 {
-//    if (self.superview) {
-//        [self layoutContentViews];
+    if (self.superview) {
+        [self layoutContentViews];
 //
 //        if (_buttonContentView.subviews.count) {
 //            [self layoutButtons];
 //        }
-//    }
+    }
 }
 
 - (void)actionButtonClicked:(UIButton*)sender
