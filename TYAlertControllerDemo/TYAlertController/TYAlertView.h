@@ -19,6 +19,8 @@ typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
     LHAlertBtnStyleVertical,//black
 };
 
+#define KButtonHeight    44
+
 
 @interface TYAlertAction : NSObject <NSCopying>
 

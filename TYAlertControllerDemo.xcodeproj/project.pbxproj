@@ -17,6 +17,7 @@
 		B08FD7D01BD905EF00B83FF5 /* screen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B08FD7CF1BD905EF00B83FF5 /* screen.jpg */; };
 		B0D617E41BDF9C5D0084EE84 /* TYAlertDropDownAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = B0D617E31BDF9C5D0084EE84 /* TYAlertDropDownAnimation.m */; };
 		BD85F43A23BF4CDF00AFDEFF /* Snip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD85F43923BF4CDE00AFDEFF /* Snip@2x.png */; };
+		BD85F44023C2D9C100AFDEFF /* OptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD85F43F23C2D9C100AFDEFF /* OptionView.m */; };
 		D35854241B9532D700B5FA1F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D35854231B9532D700B5FA1F /* main.m */; };
 		D35854271B9532D700B5FA1F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D35854261B9532D700B5FA1F /* AppDelegate.m */; };
 		D358542A1B9532D700B5FA1F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D35854291B9532D700B5FA1F /* ViewController.m */; };
@@ -61,6 +62,8 @@
 		B0D617E21BDF9C5D0084EE84 /* TYAlertDropDownAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYAlertDropDownAnimation.h; sourceTree = "<group>"; };
 		B0D617E31BDF9C5D0084EE84 /* TYAlertDropDownAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYAlertDropDownAnimation.m; sourceTree = "<group>"; };
 		BD85F43923BF4CDE00AFDEFF /* Snip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Snip@2x.png"; sourceTree = "<group>"; };
+		BD85F43E23C2D9C000AFDEFF /* OptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionView.h; sourceTree = "<group>"; };
+		BD85F43F23C2D9C100AFDEFF /* OptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionView.m; sourceTree = "<group>"; };
 		D358541E1B9532D700B5FA1F /* TYAlertControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TYAlertControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D35854221B9532D700B5FA1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D35854231B9532D700B5FA1F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -233,6 +236,8 @@
 				D37A91DF1B9E7B6000C6661A /* UIView+TYAutoLayout.h */,
 				D37A91E01B9E7B6000C6661A /* UIView+TYAutoLayout.m */,
 				BD85F43923BF4CDE00AFDEFF /* Snip@2x.png */,
+				BD85F43E23C2D9C000AFDEFF /* OptionView.h */,
+				BD85F43F23C2D9C100AFDEFF /* OptionView.m */,
 				D3C1A9741B9D1A83009738B0 /* TYAlertView.h */,
 				D3C1A9751B9D1A83009738B0 /* TYAlertView.m */,
 			);
@@ -352,6 +357,7 @@
 				B01449061BDE57E9009E0389 /* ShareView.m in Sources */,
 				D35854B51B95B7BB00B5FA1F /* TYBaseAnimation.m in Sources */,
 				B0D617E41BDF9C5D0084EE84 /* TYAlertDropDownAnimation.m in Sources */,
+				BD85F44023C2D9C100AFDEFF /* OptionView.m in Sources */,
 				D3C1A9761B9D1A83009738B0 /* TYAlertView.m in Sources */,
 				D37A91E11B9E7B6000C6661A /* UIView+TYAutoLayout.m in Sources */,
 				D35854271B9532D700B5FA1F /* AppDelegate.m in Sources */,

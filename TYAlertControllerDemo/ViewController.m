@@ -14,8 +14,11 @@
 
 #import "SettingModelView.h"
 #import "ShareView.h"
+#import "TYAlertView.h"
+#import "OptionView.h"
 
 @interface ViewController ()
+
 @end
 
 @implementation ViewController
@@ -93,24 +96,14 @@
 }
 - (IBAction)showActionSheetAction:(id)sender {
     
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"TYAlertView" message:@"This is a message, the alert view style is actionsheet. "];
-    
-    [alertView addAction:[TYAlertAction actionWithTitle:@"默认2" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        NSLog(@"%@",action.title);
-    }]];
-    
-    [alertView addAction:[TYAlertAction actionWithTitle:@"默认1" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
-        NSLog(@"%@",action.title);
-    }]];
-    
-    [alertView addAction:[TYAlertAction actionWithTitle:@"删除" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
-        NSLog(@"%@",action.title);
-    }]];
-    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
-        NSLog(@"%@",action.title);
-    }]];
+    OptionView* alertView = [OptionView alertViewWithTitle:@"选择条件" optionsArray:@[@"121",@"333",@"3呃呃呃"] SelectedIndex:2 handler:^(NSString * _Nonnull option, NSInteger index) {
+        NSLog(@"titel:%@---index:%ld",option,(long)index);
+    }];
+
     
     TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleActionSheet];
+    alertController.backgoundTapDismissEnable = YES;
+
     [self presentViewController:alertController animated:YES completion:nil];
 }
 

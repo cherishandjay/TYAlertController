@@ -82,7 +82,6 @@
 
 #define kButtonTagOffset 1000
 #define kButtonSpace     6
-#define KButtonHeight    44
 
 #define kTextFieldOffset 10000
 #define kTextFieldHeight 29
@@ -220,6 +219,7 @@
     _messageLabel = messageLabel;
     
 }
+
 
 - (void)didMoveToSuperview
 {
