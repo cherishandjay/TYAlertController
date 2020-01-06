@@ -36,7 +36,7 @@ typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
 @interface TYAlertView : UIView
 
 @property (nonatomic, weak, readonly) UILabel *titleLable;
-@property (nonatomic, weak, readonly) UILabel *messageLabel;
+@property (nonatomic, weak, readonly) UITextView *messageLabel;
 
 // alertView textfield array
 @property (nonatomic, strong, readonly) NSArray *textFieldArray;
@@ -85,5 +85,7 @@ typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *textField))configurationHandler;
 
 - (void)addImage:(NSString*)imageName andDescString:(NSString*)desc;
+
+- (void)addClickRange:(NSRange)range andhandle: (void(^)(NSString* string))handle;
 
 @end

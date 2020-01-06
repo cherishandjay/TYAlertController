@@ -46,12 +46,18 @@
 @end
 
 
-@interface TYAlertView ()
+@interface TYAlertView ()<UITextViewDelegate>
 
 // text content View
 @property (nonatomic, weak) UIView *textContentView;
 @property (nonatomic, weak) UILabel *titleLable;
-@property (nonatomic, weak) UILabel *messageLabel;
+@property (nonatomic, weak) UITextView *messageLabel;
+
+
+@property (nonatomic, copy) NSMutableAttributedString *messageAttributeString;
+@property (nonatomic, copy) void (^handler)(NSString* string);
+
+@property (nonatomic, strong) NSMutableDictionary *urlClickDic;
 
 @property (nonatomic, weak) UIView *textFieldContentView;
 @property (nonatomic, weak) NSLayoutConstraint *textFieldTopConstraint;
@@ -209,15 +215,25 @@
     [_textContentView addSubview:titleLabel];
     _titleLable = titleLabel;
 
-    UILabel *messageLabel = [[UILabel alloc]init];
-    messageLabel.numberOfLines = 0;
-    messageLabel.textAlignment = NSTextAlignmentCenter;
-    messageLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
-    messageLabel.textColor = [UIColor lightGrayColor];
-    [_textContentView addSubview:messageLabel];
-    messageLabel.text = message;
-    _messageLabel = messageLabel;
+    _messageAttributeString = [[NSMutableAttributedString alloc]initWithString:message];
+//    [self.messageAttributeString addAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]} range:range];
+
     
+    UITextView *messageLabel = [[UITextView alloc]init];
+    messageLabel.delegate = self;
+    messageLabel.editable = NO;        // 禁止输入，否则会弹出输入键盘
+    messageLabel.scrollEnabled = NO;   // 可选的，视具体情况而定
+    messageLabel.linkTextAttributes = @{NSForegroundColorAttributeName:[UIColor redColor]};
+    messageLabel.textContainer.lineFragmentPadding = 0;
+//    messageLabel.textContainerInset = UIEdgeInsetsMake(15, 0, 0, 0);
+//    messageLabel.numberOfLines = 0;
+//    messageLabel.textAlignment = NSTextAlignmentCenter;
+//    messageLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+//    messageLabel.textColor = [UIColor lightGrayColor];
+    [_textContentView addSubview:messageLabel];
+    messageLabel.attributedText = _messageAttributeString;
+    _messageLabel = messageLabel;
+
 }
 
 
@@ -280,7 +296,32 @@
     [self layoutImageAndDesc];
 }
 
+- (void)addClickRange:(NSRange)range andhandle: (void(^)(NSString* string))handle{
+    if (!self.urlClickDic) {
+        self.urlClickDic = [NSMutableDictionary dictionary];
+    }
+    
+    //click1
+    NSString* value = @"click";
+    [value stringByAppendingString:[NSString stringWithFormat:@"%lu",(unsigned long)self.urlClickDic.allKeys.count]];
+    
+    [self.messageAttributeString addAttribute:NSLinkAttributeName value:[NSString stringWithFormat:@"%@://",value] range:range];
+    
+    [self.urlClickDic setValue:handle forKey:value];
+    self.messageLabel.attributedText = self.messageAttributeString;
+}
 
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
+    
+    NSString* value = [URL scheme];
+    if (self.urlClickDic[value]) {
+        NSAttributedString *abStr = [textView.attributedText attributedSubstringFromRange:characterRange];
+        self.handler  = self.urlClickDic[value];
+        self.handler(abStr.string);
+        return NO;
+    }
+    return YES;
+}
 
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *textField))configurationHandler
 {
@@ -499,5 +540,6 @@
 //{
 //    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
 //}
+
 
 @end

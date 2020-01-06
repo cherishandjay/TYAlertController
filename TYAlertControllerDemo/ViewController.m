@@ -32,7 +32,8 @@
 
 - (IBAction)showAlertViewAction:(id)sender {
     
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"发现新设备" message:@"局域网内有很多个设备域网内有很多个设备域网内有很多个设备"];
+    NSString* message = @"局域网内有很多个设备域网内有很多个设备域网内有很多个设备";
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"发现新设备" message:message];
     
     alertView.alertBtnStyle = LHAlertBtnStyleHorizontal;
     
@@ -40,8 +41,16 @@
     [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
         NSLog(@"%@",action.title);
     }]];
-   
+    NSRange range = [message rangeOfString:@"很多"];
+    [alertView addClickRange:range andhandle:^(NSString *string) {
+        NSLog(@"点击了---%@",string);
 
+    }];
+//     range = [message rangeOfString:@"设备域网"];
+//    [alertView addClickRange:range andhandle:^(NSString *string) {
+//           NSLog(@"点击了---%@",string);
+//
+//    }];
     // 弱引用alertView 否则 会循环引用
 //    __typeof (alertView) __weak weakAlertView = alertView;
 //    [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
