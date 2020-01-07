@@ -66,18 +66,23 @@
 //    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
 //        textField.placeholder = @"请输入账号";
 //    }];
-//    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-//        textField.placeholder = @"请输入密码";
-//    }];
+    [alertView addTextFieldWithConfigurationHandler:^(UITextView *textField) {
+        textField.text = @"请输入密码";
+        
+    }];
     
-    [alertView addImage:@"Snip" andDescString:@""];
+    [alertView addTextFieldWithConfigurationHandler:^(UITextView *textField) {
+        textField.text = @"请输入密码2";
+        
+    }];
+    
+//    [alertView addImage:@"Snip" andDescString:@""];
 //    [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
 //              NSLog(@"%@",action.title);
 //          }]];
     // first way to show
-    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleActionSheet];
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
     alertController.backgoundTapDismissEnable = YES;
-    
     [alertController setViewWillShowHandler:^(UIView *alertView) {
         NSLog(@"ViewWillShow");
     }];

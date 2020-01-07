@@ -19,7 +19,31 @@ typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
     LHAlertBtnStyleVertical,//black
 };
 
-#define KButtonHeight    44
+#define KButtonHeight    42.5
+
+#define kAlertViewWidth 280
+#define kContentViewEdge 15
+#define kContentViewSpace 15
+
+#define kTextLabelSpace  6
+
+#define kButtonTagOffset 1000
+#define kButtonSpace     6
+
+#define kTextFieldOffset 10000
+#define kTextFieldHeight 29
+#define kTextFieldEdge  8
+#define KTextFieldBorderWidth 0.5
+
+#define kTitleFont  16
+
+#define kTextFont  13
+
+#define RGBHex(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16)) / 255.0 \
+green:((float)((rgbValue & 0xFF00) >> 8)) / 255.0 \
+blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
+
 
 
 @interface TYAlertAction : NSObject <NSCopying>
@@ -82,7 +106,7 @@ typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
 
 - (void)addAction:(TYAlertAction *)action;
 
-- (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *textField))configurationHandler;
+- (void)addTextFieldWithConfigurationHandler:(void (^)(UITextView *textField))configurationHandler;
 
 - (void)addImage:(NSString*)imageName andDescString:(NSString*)desc;
 

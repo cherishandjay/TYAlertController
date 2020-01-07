@@ -217,8 +217,8 @@
     
     _backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     _backgoundTapDismissEnable = NO;
-    _alertStyleEdging = 15;
-    _actionSheetStyleEdging = 15;
+    _alertStyleEdging = 52.;
+    _actionSheetStyleEdging = 13;
 }
 
 - (void)configureAlertView

@@ -51,7 +51,7 @@
 // text content View
 @property (nonatomic, weak) UIView *textContentView;
 @property (nonatomic, weak) UILabel *titleLable;
-@property (nonatomic, weak) UITextView *messageLabel;
+@property (nonatomic, weak) UITextView *messageTextView;
 
 
 @property (nonatomic, copy) NSMutableAttributedString *messageAttributeString;
@@ -79,20 +79,6 @@
 @property (nonatomic, strong) NSMutableArray *actions;
 
 @end
-
-#define kAlertViewWidth 280
-#define kContentViewEdge 15
-#define kContentViewSpace 15
-
-#define kTextLabelSpace  6
-
-#define kButtonTagOffset 1000
-#define kButtonSpace     6
-
-#define kTextFieldOffset 10000
-#define kTextFieldHeight 29
-#define kTextFieldEdge  8
-#define KTextFieldBorderWidth 0.5
 
 
 @implementation TYAlertView
@@ -148,18 +134,18 @@
     _buttonContentViewTop = kContentViewSpace;
     _buttonCornerRadius = 4.0;
     _buttonFont = [UIFont fontWithName:@"HelveticaNeue" size:18];
-    _buttonDefaultBgColor = [UIColor blackColor];
-    _buttonCancelBgColor = [UIColor lightGrayColor];
-    _buttonDestructiveBgColor = [UIColor blueColor];
+    _buttonDefaultBgColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1/1.0];
+    _buttonCancelBgColor =  [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1/1.0];
+    _buttonDestructiveBgColor = [UIColor colorWithRed:95/255.0 green:167/255.0 blue:254/255.0 alpha:1/1.0];
     
     _textFieldHeight = kTextFieldHeight;
     _textFieldEdge = kTextFieldEdge;
     _textFieldBorderWidth = KTextFieldBorderWidth;
     _textFieldContentViewEdge = kContentViewEdge;
     
-    _textFieldBorderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1];
+    _textFieldBorderColor = RGBHex(0xDDDDDD);
     _textFieldBackgroudColor = [UIColor whiteColor];
-    _textFieldFont = [UIFont systemFontOfSize:14];
+    _textFieldFont =  [UIFont fontWithName:@"MI-LANTING_GB-OUTSIDE-YS" size:12];
     
     _buttons = [NSMutableArray array];
     _actions = [NSMutableArray array];
@@ -208,7 +194,7 @@
 {
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
+    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:kTitleFont];
     titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
     titleLabel.numberOfLines = 0;
     titleLabel.text = title;
@@ -219,31 +205,30 @@
     paragraphStyle.lineSpacing = 1;// 字体的行间距
     paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
     paragraphStyle.alignment = NSTextAlignmentCenter;
-    
+ 
     NSDictionary *attributes = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 NSFontAttributeName:[UIFont systemFontOfSize:kTextFont],
+                                 NSParagraphStyleAttributeName:paragraphStyle,
+                                 NSForegroundColorAttributeName:[UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1/1.0]
                                  };
     _messageAttributeString = [[NSMutableAttributedString alloc]initWithString:message attributes:attributes];
 
     
-    UITextView *messageLabel = [[UITextView alloc]init];
-    messageLabel.delegate = self;
-    messageLabel.editable = NO;        // 禁止输入，否则会弹出输入键盘
-    messageLabel.scrollEnabled = NO;   // 可选的，视具体情况而定
-    messageLabel.linkTextAttributes = @{NSForegroundColorAttributeName:[UIColor redColor]};
-    messageLabel.textContainer.lineFragmentPadding = 0;
-    messageLabel.textAlignment = NSTextAlignmentCenter;
-//    messageLabel.textContainerInset = UIEdgeInsetsMake(15, 0, 0, 0);
-//    messageLabel.numberOfLines = 0;
-//    messageLabel.textAlignment = NSTextAlignmentCenter;
-//    messageLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
-//    messageLabel.textColor = [UIColor lightGrayColor];
-    [_textContentView addSubview:messageLabel];
-    messageLabel.attributedText = _messageAttributeString;
-    _messageLabel = messageLabel;
-     [_messageLabel addObserver:self forKeyPath:@"contentSize"options:NSKeyValueObservingOptionNew context:nil];
-
+    UITextView *messageTextView = [[UITextView alloc]init];
+    messageTextView.delegate = self;
+    messageTextView.editable = NO;        // 禁止输入，否则会弹出输入键盘
+    messageTextView.scrollEnabled = NO;   // 可选的，视具体情况而定
+    messageTextView.linkTextAttributes = @{NSForegroundColorAttributeName:[UIColor redColor]};
+    messageTextView.textContainer.lineFragmentPadding = 0;
+    messageTextView.textAlignment = NSTextAlignmentCenter;
+//    messageTextView.textContainerInset = UIEdgeInsetsMake(15, 0, 0, 0);
+//    messageTextView.numberOfLines = 0;
+//    messageTextView.textAlignment = NSTextAlignmentCenter;
+//    messageTextView.font = [UIFont fontWithName:@"HelveticaNeue" size:15];
+//    messageTextView.textColor = [UIColor lightGrayColor];
+    [_textContentView addSubview:messageTextView];
+    messageTextView.attributedText = _messageAttributeString;
+    _messageTextView = messageTextView;
 }
 
 
@@ -262,20 +247,6 @@
     }
 }
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"contentSize"])
-    {
-        UITextView *tv = object;
-        CGFloat deadSpace = ([tv bounds].size.height - [tv contentSize].height);
-        CGFloat inset = MAX(0, deadSpace/2.0);
-        tv.contentInset = UIEdgeInsetsMake(inset, tv.contentInset.left, inset, tv.contentInset.right);
-    }
-
-}
-
-
-
 
 - (void)addAction:(TYAlertAction *)action
 {
@@ -287,7 +258,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.clipsToBounds = YES;
     [button setTitle:action.title forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
+    button.titleLabel.font = [UIFont systemFontOfSize:kTitleFont];
 //    button.backgroundColor = [self buttonBgColorWithStyle:action.style];
     [button setBackgroundColor:[UIColor whiteColor]];
     button.enabled = action.enabled;
@@ -311,8 +282,8 @@
 
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-    titleLabel.textColor = [UIColor grayColor];
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:kTitleFont];
+    titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1/1.0];
     titleLabel.numberOfLines = 0;
     [_imagetextContentView addSubview:titleLabel];
     _descLabel = titleLabel;
@@ -333,7 +304,7 @@
     [self.messageAttributeString addAttribute:NSLinkAttributeName value:[NSString stringWithFormat:@"%@://",value] range:range];
     
     [self.urlClickDic setValue:handle forKey:value];
-    self.messageLabel.attributedText = self.messageAttributeString;
+    self.messageTextView.attributedText = self.messageAttributeString;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange{
@@ -348,15 +319,39 @@
     return YES;
 }
 
-- (void)addTextFieldWithConfigurationHandler:(void (^)(UITextField *textField))configurationHandler
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]) {
+        [textView endEditing:YES];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    textView.text = nil;
+    textView.textColor = [UIColor blackColor];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    
+}
+
+
+- (void)addTextFieldWithConfigurationHandler:(void (^)(UITextView *textField))configurationHandler
 {
     if (_textFields == nil) {
         _textFields = [NSMutableArray array];
     }
     
-    UITextField *textField = [[UITextField alloc]init];
+    UITextView *textField = [[UITextView alloc]init];
+    textField.delegate = self;
+    textField.scrollEnabled = NO;   // 可选的，视具体情况而定
+    textField.textContainer.lineFragmentPadding = 0;
     textField.tag = kTextFieldOffset + _textFields.count;
     textField.font = _textFieldFont;
+    textField.textColor = [UIColor colorWithRed:180/255.0 green:180/255.0 blue:180/255.0 alpha:1/1.0];
     textField.translatesAutoresizingMaskIntoConstraints = NO;
     
     if (configurationHandler) {
@@ -400,7 +395,7 @@
     // textContentView
     _textContentView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self addConstraintWithView:_textContentView topView:self leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake((_titleLable.text.length ||_messageLabel.text.length)?_contentViewSpace:0, _textLabelContentViewEdge, 0, -_textLabelContentViewEdge)];
+    [self addConstraintWithView:_textContentView topView:self leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake((_titleLable.text.length ||_messageTextView.text.length)?_contentViewSpace:0, _textLabelContentViewEdge, 0, -_textLabelContentViewEdge)];
     
     // textFieldContentView
     _textFieldContentView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -424,13 +419,13 @@
     
     
     //设置圆角
-    self.layer.cornerRadius = 10.0f;
+    self.layer.cornerRadius = 12.0f;
     self.layer.masksToBounds = YES;
 }
 
 - (void)layoutTextLabels
 {
-    if (!_titleLable.translatesAutoresizingMaskIntoConstraints && _messageLabel.translatesAutoresizingMaskIntoConstraints) {
+    if (!_titleLable.translatesAutoresizingMaskIntoConstraints && _messageTextView.translatesAutoresizingMaskIntoConstraints) {
         // layout done
         return;
     }
@@ -439,9 +434,9 @@
     [_textContentView addConstraintWithView:_titleLable topView:_textContentView leftView:_textContentView bottomView:nil rightView:_textContentView edgeInset:UIEdgeInsetsZero];
     
     // message
-    _messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    [_textContentView addConstraintWithTopView:_titleLable toBottomView:_messageLabel constant:(_titleLable.text.length && _messageLabel.text.length)? _textLabelSpace:0];
-    [_textContentView addConstraintWithView:_messageLabel topView:nil leftView:_textContentView bottomView:_textContentView rightView:_textContentView edgeInset:UIEdgeInsetsZero];
+    _messageTextView.translatesAutoresizingMaskIntoConstraints = NO;
+    [_textContentView addConstraintWithTopView:_titleLable toBottomView:_messageTextView constant:(_titleLable.text.length && _messageTextView.text.length)? _textLabelSpace:0];
+    [_textContentView addConstraintWithView:_messageTextView topView:nil leftView:_textContentView bottomView:_textContentView rightView:_textContentView edgeInset:UIEdgeInsetsZero];
 }
 
 - (void)layoutButtons
@@ -519,7 +514,7 @@
 
 - (void)layoutTextFields
 {
-    UITextField *textField = _textFields.lastObject;
+    UITextView *textField = _textFields.lastObject;
     
     if (_textFields.count == 1) {
         // setup textFieldContentView
@@ -532,7 +527,7 @@
         [textField addConstraintWidth:0 height:_textFieldHeight];
     }else {
         // textField
-        UITextField *lastSecondTextField = _textFields[_textFields.count - 2];
+        UITextView *lastSecondTextField = _textFields[_textFields.count - 2];
         [_textFieldContentView removeConstraintWithView:lastSecondTextField attribute:NSLayoutAttributeBottom];
         [_textFieldContentView addConstraintWithTopView:lastSecondTextField toBottomView:textField constant:_textFieldBorderWidth];
         [_textFieldContentView addConstraintWithView:textField topView:nil leftView:_textFieldContentView bottomView:_textFieldContentView rightView:_textFieldContentView edgeInset:UIEdgeInsetsMake(0, _textFieldEdge, -_textFieldBorderWidth, -_textFieldEdge)];
@@ -563,9 +558,7 @@
 
 - (void)dealloc
 {
-    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
-
-    [self.messageLabel removeObserver:self forKeyPath:@"contentSize"];
+//    NSLog(@"%@ dealloc",NSStringFromClass([self class]));
 }
 
 

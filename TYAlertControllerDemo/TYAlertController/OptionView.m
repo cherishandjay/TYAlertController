@@ -55,8 +55,8 @@
 {
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-    titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:kTextFont];
+    titleLabel.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1/1.0];
     titleLabel.layer.borderWidth = 1/[UIScreen mainScreen].scale;
     titleLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
     titleLabel.numberOfLines = 0;
@@ -80,13 +80,13 @@
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setTitle:self.optionsArray[i] forState:UIControlStateNormal];
-        button.titleLabel.font = [UIFont systemFontOfSize:16];
+        button.titleLabel.font = [UIFont systemFontOfSize:kTitleFont];
         //    button.backgroundColor = [self buttonBgColorWithStyle:action.style];
         [button setBackgroundColor:[UIColor whiteColor]];
 //        button.enabled = action.enabled;
         button.tag = i;
         button.translatesAutoresizingMaskIntoConstraints = NO;
-        [button setTitleColor:(i == self.selectedIndex)? [UIColor blueColor]:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setTitleColor:(i == self.selectedIndex)?  [UIColor colorWithRed:95/255.0 green:167/255.0 blue:254/255.0 alpha:1/1.0]:[UIColor blackColor] forState:UIControlStateNormal];
         
         [button addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_buttonContentView addSubview:button];

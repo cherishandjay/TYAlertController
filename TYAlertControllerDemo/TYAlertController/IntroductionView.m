@@ -64,8 +64,7 @@
     
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:16];
-    titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    titleLabel.font =  [UIFont fontWithName:@"PingFangSC-Regular" size:kTextFont];
     titleLabel.numberOfLines = 0;
     titleLabel.text = title;
     [self addSubview:titleLabel];
@@ -73,11 +72,11 @@
     
     button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:btnName forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
+    button.titleLabel.font = [UIFont systemFontOfSize:kTitleFont];
     [button setBackgroundColor:[UIColor whiteColor]];
     button.tag = 1;
     button.translatesAutoresizingMaskIntoConstraints = NO;
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button setTitleColor: [UIColor colorWithRed:95/255.0 green:167/255.0 blue:254/255.0 alpha:1/1.0] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     button.layer.borderWidth = 1/[UIScreen mainScreen].scale;
     button.layer.borderColor = [UIColor lightGrayColor].CGColor;
