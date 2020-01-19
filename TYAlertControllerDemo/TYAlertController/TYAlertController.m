@@ -82,21 +82,21 @@
                  transitionAnimationClass:nil];
 }
 
-+ (instancetype)alertControllerWithAlertView:(UIView *)alertView preferredStyle:(TYAlertControllerStyle)preferredStyle transitionAnimation:(TYAlertTransitionAnimation)transitionAnimation
-{
-    return [[self alloc]initWithAlertView:alertView
-                           preferredStyle:preferredStyle
-                      transitionAnimation:transitionAnimation
-                 transitionAnimationClass:nil];
-}
+//+ (instancetype)alertControllerWithAlertView:(UIView *)alertView preferredStyle:(TYAlertControllerStyle)preferredStyle transitionAnimation:(TYAlertTransitionAnimation)transitionAnimation
+//{
+//    return [[self alloc]initWithAlertView:alertView
+//                           preferredStyle:preferredStyle
+//                      transitionAnimation:transitionAnimation
+//                 transitionAnimationClass:nil];
+//}
 
-+ (instancetype)alertControllerWithAlertView:(UIView *)alertView preferredStyle:(TYAlertControllerStyle)preferredStyle transitionAnimationClass:(Class)transitionAnimationClass
-{
-    return [[self alloc]initWithAlertView:alertView
-                           preferredStyle:preferredStyle
-                      transitionAnimation:TYAlertTransitionAnimationCustom
-                 transitionAnimationClass:transitionAnimationClass];
-}
+//+ (instancetype)alertControllerWithAlertView:(UIView *)alertView preferredStyle:(TYAlertControllerStyle)preferredStyle transitionAnimationClass:(Class)transitionAnimationClass
+//{
+//    return [[self alloc]initWithAlertView:alertView
+//                           preferredStyle:preferredStyle
+//                      transitionAnimation:TYAlertTransitionAnimationCustom
+//                 transitionAnimationClass:transitionAnimationClass];
+//}
 
 #pragma mark - life cycle
 
@@ -217,7 +217,7 @@
     
     _backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
     _backgoundTapDismissEnable = NO;
-    _alertStyleEdging = 52.;
+    _alertStyleEdging = 53.;
     _actionSheetStyleEdging = 13;
 }
 
@@ -245,10 +245,7 @@
 - (void)configureAlertViewWidth
 {
     // width, height
-    if (!CGSizeEqualToSize(_alertView.frame.size,CGSizeZero)) {
-        [_alertView addConstraintWidth:CGRectGetWidth(_alertView.frame) height:CGRectGetHeight(_alertView.frame)];
-        
-    }else {
+    if (CGSizeEqualToSize(_alertView.frame.size,CGSizeZero)) {
         BOOL findAlertViewWidthConstraint = NO;
         for (NSLayoutConstraint *constraint in _alertView.constraints) {
             if (constraint.firstAttribute == NSLayoutAttributeWidth) {
@@ -260,6 +257,9 @@
         if (!findAlertViewWidthConstraint) {
             [_alertView addConstraintWidth:CGRectGetWidth(self.view.frame)-2*_alertStyleEdging height:0];
         }
+
+    }else {
+        [_alertView addConstraintWidth:CGRectGetWidth(_alertView.frame) height:CGRectGetHeight(_alertView.frame)];
     }
 }
 

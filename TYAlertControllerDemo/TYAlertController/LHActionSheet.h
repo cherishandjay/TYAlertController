@@ -1,4 +1,4 @@
-//
+
 //  TYAlertView.h
 //  TYAlertControllerDemo
 //
@@ -20,8 +20,6 @@ typedef NS_ENUM(NSUInteger, LHAlertBtnStyle) {
 };
 
 #define KButtonHeight    44
-
-#define KActionSheetBtnHeight    71
 
 #define kAlertViewWidth 280
 #define kContentViewEdge 20
@@ -61,7 +59,7 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 @end
 
 
-@interface TYAlertView : UIView
+@interface LHActionSheet : UIView
 
 @property (nonatomic, weak, readonly) UILabel *titleLable;
 @property (nonatomic, weak, readonly) UITextView *messageLabel;
@@ -108,11 +106,11 @@ blue:((float)(rgbValue & 0xFF)) / 255.0 alpha:1.0]
 
 + (instancetype)alertViewWithTitle:(NSString *)title message:(NSString *)message;
 
-+ (instancetype)alertViewWithTitle:(NSString *)title message:(NSString *)message description:(NSString*)description andDescImageName:(NSString*)imageName;
-
 - (void)addAction:(TYAlertAction *)action;
 
 - (void)addTextFieldWithConfigurationHandler:(void (^)(UITextView *textField))configurationHandler;
+
+- (void)addImage:(NSString*)imageName andDescString:(NSString*)desc;
 
 - (void)addClickRange:(NSRange)range andhandle: (void(^)(NSString* string))handle;
 

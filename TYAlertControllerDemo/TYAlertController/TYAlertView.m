@@ -85,16 +85,6 @@
 
 #pragma mark - init
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame]) {
-        
-       
-        
-    }
-    return self;
-}
-
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message
 {
     if (self = [self init]) {
@@ -114,6 +104,18 @@
     return [[self alloc]initWithTitle:title message:message];
 }
 
++ (instancetype)alertViewWithTitle:(NSString *)title message:(NSString *)message description:(NSString*)description andDescImageName:(NSString*)imageName
+{
+
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:title message:message];
+    alertView.alertBtnStyle = LHAlertBtnStyleHorizontal;
+    alertView.buttonHeight = KActionSheetBtnHeight;
+    [alertView addImage:imageName andDescString:description];
+    return alertView;
+}
+
+
+
 #pragma mark - configure
 
 - (void)configureProperty
@@ -122,7 +124,7 @@
     self.backgroundColor = [UIColor whiteColor];
     
     _alertBtnStyle = LHAlertBtnStyleVertical;
-    _alertViewWidth = kAlertViewWidth;
+    _alertViewWidth = 0;
     _contentViewSpace = kContentViewSpace;
     
     _textLabelSpace = kTextLabelSpace;
@@ -194,8 +196,8 @@
 {
     UILabel *titleLabel = [[UILabel alloc]init];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:kTitleFont];
-    titleLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    titleLabel.font = [UIFont fontWithName:@"PingFangSC-Regular" size:kTitleFont];
+    titleLabel.textColor =  [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1/1.0];
     titleLabel.numberOfLines = 0;
     titleLabel.text = title;
     [_textContentView addSubview:titleLabel];
@@ -266,7 +268,7 @@
     button.translatesAutoresizingMaskIntoConstraints = NO;
     [button setTitleColor:[self buttonBgColorWithStyle:action.style] forState:UIControlStateNormal];
     button.layer.borderWidth = 1/[UIScreen mainScreen].scale;
-    button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    button.layer.borderColor = _textFieldBorderColor.CGColor;
     [button addTarget:self action:@selector(actionButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
     [_buttonContentView addSubview:button];
@@ -405,9 +407,9 @@
     [self addConstraintWithView:_textFieldContentView topView:nil leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, _textFieldContentViewEdge, 0, -_textFieldContentViewEdge)];
     
     _imagetextContentView.translatesAutoresizingMaskIntoConstraints = NO;
-    _imageTextTopConstraint = [self addConstraintWithTopView:_textFieldContentView toBottomView:_imagetextContentView constant:self.imagetextContentView.subviews.count? (_buttonContentViewTop):0];
+    _imageTextTopConstraint = [self addConstraintWithTopView:_textFieldContentView toBottomView:_imagetextContentView constant:self.imagetextContentView.subviews.count? (kImagePadding):0];
   
-    [self addConstraintWithView:_imagetextContentView topView:nil leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, _textFieldContentViewEdge, 0, -_textFieldContentViewEdge)];
+    [self addConstraintWithView:_imagetextContentView topView:nil leftView:self bottomView:nil rightView:self edgeInset:UIEdgeInsetsMake(0, kImagePadding, 0, -kImagePadding)];
 
     
     // buttonContentView
@@ -432,11 +434,21 @@
     // title
     _titleLable.translatesAutoresizingMaskIntoConstraints = NO;
     [_textContentView addConstraintWithView:_titleLable topView:_textContentView leftView:_textContentView bottomView:nil rightView:_textContentView edgeInset:UIEdgeInsetsZero];
+    if (!_messageTextView.attributedText.length && _titleLable.text.length) {
+        [_titleLable addConstraint:[NSLayoutConstraint constraintWithItem:_titleLable attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:nil attribute:0 multiplier:1 constant:96.5 - _textLabelSpace*2]];
+    }
+    
     
     // message
     _messageTextView.translatesAutoresizingMaskIntoConstraints = NO;
     [_textContentView addConstraintWithTopView:_titleLable toBottomView:_messageTextView constant:(_titleLable.text.length && _messageTextView.text.length)? _textLabelSpace:0];
     [_textContentView addConstraintWithView:_messageTextView topView:nil leftView:_textContentView bottomView:_textContentView rightView:_textContentView edgeInset:UIEdgeInsetsZero];
+    
+    if (!_messageTextView.attributedText.length) {
+        [_messageTextView addConstraint:[NSLayoutConstraint constraintWithItem:_messageTextView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:0 multiplier:1 constant:0]];
+    }
+    
+
 }
 
 - (void)layoutButtons
@@ -505,11 +517,12 @@
       // title
     _descImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.imagetextContentView addConstraintWithView:self.descImageView topView:self.imagetextContentView leftView:self.imagetextContentView bottomView:nil rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
-    [self.imagetextContentView addConstraintWithTopView:self.descImageView toBottomView:self.descLabel constant:0];
+    [self.imagetextContentView addConstraintWithTopView:self.descImageView toBottomView:self.descLabel constant:self.descLabel.text.length?10:0];
 
     _descLabel.translatesAutoresizingMaskIntoConstraints = NO;
 
-    [self.imagetextContentView addConstraintWithView:self.descLabel topView:nil leftView:self.imagetextContentView bottomView:self.imagetextContentView rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [self.imagetextContentView addConstraintWithView:self.descLabel topView:nil leftView:self.imagetextContentView bottomView:self.imagetextContentView rightView:self.imagetextContentView edgeInset:UIEdgeInsetsMake(0, 0,self.descLabel.text.length?-15:0, 0)];
+    
 }
 
 - (void)layoutTextFields

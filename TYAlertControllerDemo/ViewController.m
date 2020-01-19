@@ -10,7 +10,7 @@
 // contain this header
 #import "UIView+TYAlertView.h"
 // if you want blur efffect contain this 
-#import "TYAlertController+BlurEffects.h"
+//#import "TYAlertController+BlurEffects.h"
 
 #import "SettingModelView.h"
 #import "ShareView.h"
@@ -34,74 +34,70 @@
 
 - (IBAction)showAlertViewAction:(id)sender {
     
-    NSString* message = @"局域网内有很多个设备域网内有很多个设备域网内有很多个设备";
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"发现新设备" message:message];
+    NSString* message = @"局域网内发现多个设备可以链接局域网内发现多个设备可以链接";
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"" message:message];
     
     alertView.alertBtnStyle = LHAlertBtnStyleHorizontal;
     
     
+    alertView = [TYAlertView alertViewWithTitle:@"发现新设备" message:message description:@"" andDescImageName:@"Snip"];
+    
     [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
         NSLog(@"%@",action.title);
     }]];
-//    NSRange range = [message rangeOfString:@"很多"];
-//    [alertView addClickRange:range andhandle:^(NSString *string) {
-//        NSLog(@"点击了---%@",string);
-//
-//    }];
+
+    NSRange range = [message rangeOfString:@"多个"];
+    [alertView addClickRange:range andhandle:^(NSString *string) {
+        NSLog(@"点击了---%@",string);
+
+    }];
 //     range = [message rangeOfString:@"设备域网"];
 //    [alertView addClickRange:range andhandle:^(NSString *string) {
 //           NSLog(@"点击了---%@",string);
 //
 //    }];
     // 弱引用alertView 否则 会循环引用
-//    __typeof (alertView) __weak weakAlertView = alertView;
-//    [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+    __typeof (alertView) __weak weakAlertView = alertView;
+    [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+
+        NSLog(@"%@",action.title);
+        for (UITextField *textField in weakAlertView.textFieldArray) {
+            NSLog(@"%@",textField.text);
+        }
+    }]];
+    
+   
+//    [alertView addTextFieldWithConfigurationHandler:^(UITextView *textField) {
+//        textField.text = @"请输入密码";
 //
-//        NSLog(@"%@",action.title);
-//        for (UITextField *textField in weakAlertView.textFieldArray) {
-//            NSLog(@"%@",textField.text);
-//        }
-//    }]];
-    
-//    [alertView addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-//        textField.placeholder = @"请输入账号";
 //    }];
-    [alertView addTextFieldWithConfigurationHandler:^(UITextView *textField) {
-        textField.text = @"请输入密码";
-        
-    }];
     
-    [alertView addTextFieldWithConfigurationHandler:^(UITextView *textField) {
-        textField.text = @"请输入密码2";
-        
-    }];
-    
-//    [alertView addImage:@"Snip" andDescString:@""];
-//    [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+
+ //    [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
 //              NSLog(@"%@",action.title);
 //          }]];
     // first way to show
-    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
+    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleActionSheet];
     alertController.backgoundTapDismissEnable = YES;
-    [alertController setViewWillShowHandler:^(UIView *alertView) {
-        NSLog(@"ViewWillShow");
-    }];
-    
-    [alertController setViewDidShowHandler:^(UIView *alertView) {
-        NSLog(@"ViewDidShow");
-    }];
-    
-    [alertController setViewWillHideHandler:^(UIView *alertView) {
-        NSLog(@"ViewWillHide");
-    }];
-    
-    [alertController setViewDidHideHandler:^(UIView *alertView) {
-        NSLog(@"ViewDidHide");
-    }];
-    
-    [alertController setDismissComplete:^{
-        NSLog(@"DismissComplete");
-    }];
+//    [alertController setViewWillShowHandler:^(UIView *alertView) {
+//        NSLog(@"ViewWillShow");
+//    }];
+//
+//    [alertController setViewDidShowHandler:^(UIView *alertView) {
+//        NSLog(@"ViewDidShow");
+//    }];
+//
+//    [alertController setViewWillHideHandler:^(UIView *alertView) {
+//        NSLog(@"ViewWillHide");
+//    }];
+//
+//    [alertController setViewDidHideHandler:^(UIView *alertView) {
+//        NSLog(@"ViewDidHide");
+//    }];
+//
+//    [alertController setDismissComplete:^{
+//        NSLog(@"DismissComplete");
+//    }];
     
     //alertController.alertViewOriginY = 60;
     [self presentViewController:alertController animated:YES completion:nil];
@@ -136,21 +132,60 @@
     TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:shareView preferredStyle:TYAlertControllerStyleAlert];
     
     // blur effect
-    [alertController setBlurEffectWithView:self.view];
+//    [alertController setBlurEffectWithView:self.view];
     
     //alertController.alertViewOriginY = 60;
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)dropdwonAnimationAction:(id)sender {
-    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"TYAlertView" message:@"This is a message, the alert view containt dropdwon animation. "];
     
-    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
-        NSLog(@"%@",action.title);
+    
+    NSString* message = @"局域网内发现多个设备可以链接局域网内发现多个设备可以链接";
+    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"弹框主标题" message:message];
+
+    alertView.alertBtnStyle = LHAlertBtnStyleHorizontal;
+
+
+    NSRange range = [message rangeOfString:@"局域网"];
+    [alertView addClickRange:range andhandle:^(NSString *string) {
+           NSLog(@"点击了---%@",string);
+
+    }];
+    
+     [alertView addAction:[TYAlertAction actionWithTitle:@"按钮" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+                  NSLog(@"%@",action.title);
     }]];
-    
-    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert transitionAnimation:TYAlertTransitionAnimationDropDown];
+        // 弱引用alertView 否则 会循环引用
+        __typeof (alertView) __weak weakAlertView = alertView;
+        [alertView addAction:[TYAlertAction actionWithTitle:@"确定" style:TYAlertActionStyleDestructive handler:^(TYAlertAction *action) {
+
+            NSLog(@"%@",action.title);
+            for (UITextField *textField in weakAlertView.textFieldArray) {
+                NSLog(@"%@",textField.text);
+            }
+        }]];
+        
+       
+    //    [alertView addTextFieldWithConfigurationHandler:^(UITextView *textField) {
+    //        textField.text = @"请输入密码";
+    //
+    //    }];
+        
+
+   
+        TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert];
+        alertController.backgoundTapDismissEnable = YES;
     [self presentViewController:alertController animated:YES completion:nil];
+
+//    TYAlertView *alertView = [TYAlertView alertViewWithTitle:@"TYAlertView" message:@"This is a message, the alert view containt dropdwon animation. "];
+//
+//    [alertView addAction:[TYAlertAction actionWithTitle:@"取消" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
+//        NSLog(@"%@",action.title);
+//    }]];
+//
+//    TYAlertController *alertController = [TYAlertController alertControllerWithAlertView:alertView preferredStyle:TYAlertControllerStyleAlert transitionAnimation:TYAlertTransitionAnimationDropDown];
+//    [self presentViewController:alertController animated:YES completion:nil];
 
     // or show,use UIView Category
     //[alertView showInController:self preferredStyle:TYAlertControllerStyleAlert];
