@@ -1,0 +1,422 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9361708723A361D500FEDD62 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361708623A361D500FEDD62 /* AppDelegate.m */; };
+		9361708A23A361D500FEDD62 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361708923A361D500FEDD62 /* SceneDelegate.m */; };
+		9361708D23A361D500FEDD62 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361708C23A361D500FEDD62 /* ViewController.m */; };
+		9361709023A361D500FEDD62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9361708E23A361D500FEDD62 /* Main.storyboard */; };
+		9361709223A361DA00FEDD62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9361709123A361DA00FEDD62 /* Assets.xcassets */; };
+		9361709523A361DA00FEDD62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9361709323A361DA00FEDD62 /* LaunchScreen.storyboard */; };
+		9361709823A361DA00FEDD62 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9361709723A361DA00FEDD62 /* main.m */; };
+		BD85F3DF23BB34E600AFDEFF /* AViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD85F3DE23BB34E600AFDEFF /* AViewController.m */; };
+		BDA7CE4F23D466DA00BB5AEB /* IntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE3F23D466DA00BB5AEB /* IntroductionView.m */; };
+		BDA7CE5023D466DA00BB5AEB /* UIView+LHAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4023D466DA00BB5AEB /* UIView+LHAutoLayout.m */; };
+		BDA7CE5123D466DA00BB5AEB /* LHAlertController+TransitionAnimate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4123D466DA00BB5AEB /* LHAlertController+TransitionAnimate.m */; };
+		BDA7CE5223D466DA00BB5AEB /* LHBaseAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4323D466DA00BB5AEB /* LHBaseAnimation.m */; };
+		BDA7CE5323D466DA00BB5AEB /* UIView+LHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4423D466DA00BB5AEB /* UIView+LHAlertView.m */; };
+		BDA7CE5423D466DA00BB5AEB /* LHAlertFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4523D466DA00BB5AEB /* LHAlertFadeAnimation.m */; };
+		BDA7CE5523D466DA00BB5AEB /* LHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4723D466DA00BB5AEB /* LHAlertView.m */; };
+		BDA7CE5623D466DA00BB5AEB /* OptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4823D466DA00BB5AEB /* OptionView.m */; };
+		BDA7CE5723D466DA00BB5AEB /* TYShowAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4923D466DA00BB5AEB /* TYShowAlertView.m */; };
+		BDA7CE5823D466DA00BB5AEB /* LHAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDA7CE4B23D466DA00BB5AEB /* LHAlertController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		9361708223A361D400FEDD62 /* WKTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9361708523A361D500FEDD62 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9361708623A361D500FEDD62 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9361708823A361D500FEDD62 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		9361708923A361D500FEDD62 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		9361708B23A361D500FEDD62 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		9361708C23A361D500FEDD62 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		9361708F23A361D500FEDD62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9361709123A361DA00FEDD62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9361709423A361DA00FEDD62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9361709623A361DA00FEDD62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9361709723A361DA00FEDD62 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BD85F3DD23BB34E600AFDEFF /* AViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AViewController.h; sourceTree = "<group>"; };
+		BD85F3DE23BB34E600AFDEFF /* AViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AViewController.m; sourceTree = "<group>"; };
+		BDA7CE3823D466DA00BB5AEB /* UIView+LHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LHAlertView.h"; sourceTree = "<group>"; };
+		BDA7CE3923D466DA00BB5AEB /* LHBaseAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHBaseAnimation.h; sourceTree = "<group>"; };
+		BDA7CE3A23D466DA00BB5AEB /* TYShowAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYShowAlertView.h; sourceTree = "<group>"; };
+		BDA7CE3B23D466DA00BB5AEB /* OptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionView.h; sourceTree = "<group>"; };
+		BDA7CE3C23D466DA00BB5AEB /* LHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAlertView.h; sourceTree = "<group>"; };
+		BDA7CE3D23D466DA00BB5AEB /* LHAlertFadeAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAlertFadeAnimation.h; sourceTree = "<group>"; };
+		BDA7CE3F23D466DA00BB5AEB /* IntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroductionView.m; sourceTree = "<group>"; };
+		BDA7CE4023D466DA00BB5AEB /* UIView+LHAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LHAutoLayout.m"; sourceTree = "<group>"; };
+		BDA7CE4123D466DA00BB5AEB /* LHAlertController+TransitionAnimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LHAlertController+TransitionAnimate.m"; sourceTree = "<group>"; };
+		BDA7CE4223D466DA00BB5AEB /* LHAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAlertController.h; sourceTree = "<group>"; };
+		BDA7CE4323D466DA00BB5AEB /* LHBaseAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHBaseAnimation.m; sourceTree = "<group>"; };
+		BDA7CE4423D466DA00BB5AEB /* UIView+LHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LHAlertView.m"; sourceTree = "<group>"; };
+		BDA7CE4523D466DA00BB5AEB /* LHAlertFadeAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAlertFadeAnimation.m; sourceTree = "<group>"; };
+		BDA7CE4723D466DA00BB5AEB /* LHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAlertView.m; sourceTree = "<group>"; };
+		BDA7CE4823D466DA00BB5AEB /* OptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionView.m; sourceTree = "<group>"; };
+		BDA7CE4923D466DA00BB5AEB /* TYShowAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYShowAlertView.m; sourceTree = "<group>"; };
+		BDA7CE4A23D466DA00BB5AEB /* IntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroductionView.h; sourceTree = "<group>"; };
+		BDA7CE4B23D466DA00BB5AEB /* LHAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LHAlertController.m; sourceTree = "<group>"; };
+		BDA7CE4C23D466DA00BB5AEB /* UIView+LHAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LHAutoLayout.h"; sourceTree = "<group>"; };
+		BDA7CE4D23D466DA00BB5AEB /* LHAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHAlert.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9361707F23A361D400FEDD62 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9361707923A361D400FEDD62 = {
+			isa = PBXGroup;
+			children = (
+				9361708423A361D500FEDD62 /* WKTest */,
+				9361708323A361D400FEDD62 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9361708323A361D400FEDD62 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9361708223A361D400FEDD62 /* WKTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9361708423A361D500FEDD62 /* WKTest */ = {
+			isa = PBXGroup;
+			children = (
+				9361708523A361D500FEDD62 /* AppDelegate.h */,
+				9361708623A361D500FEDD62 /* AppDelegate.m */,
+				9361708823A361D500FEDD62 /* SceneDelegate.h */,
+				9361708923A361D500FEDD62 /* SceneDelegate.m */,
+				9361708B23A361D500FEDD62 /* ViewController.h */,
+				9361708C23A361D500FEDD62 /* ViewController.m */,
+				BDA7CE3723D466DA00BB5AEB /* LMAlertController */,
+				BD85F3DD23BB34E600AFDEFF /* AViewController.h */,
+				BD85F3DE23BB34E600AFDEFF /* AViewController.m */,
+				9361708E23A361D500FEDD62 /* Main.storyboard */,
+				9361709123A361DA00FEDD62 /* Assets.xcassets */,
+				9361709323A361DA00FEDD62 /* LaunchScreen.storyboard */,
+				9361709623A361DA00FEDD62 /* Info.plist */,
+				9361709723A361DA00FEDD62 /* main.m */,
+			);
+			path = WKTest;
+			sourceTree = "<group>";
+		};
+		BDA7CE3723D466DA00BB5AEB /* LMAlertController */ = {
+			isa = PBXGroup;
+			children = (
+				BDA7CE3823D466DA00BB5AEB /* UIView+LHAlertView.h */,
+				BDA7CE4423D466DA00BB5AEB /* UIView+LHAlertView.m */,
+				BDA7CE3923D466DA00BB5AEB /* LHBaseAnimation.h */,
+				BDA7CE4323D466DA00BB5AEB /* LHBaseAnimation.m */,
+				BDA7CE3C23D466DA00BB5AEB /* LHAlertView.h */,
+				BDA7CE4723D466DA00BB5AEB /* LHAlertView.m */,
+				BDA7CE3D23D466DA00BB5AEB /* LHAlertFadeAnimation.h */,
+				BDA7CE4523D466DA00BB5AEB /* LHAlertFadeAnimation.m */,
+				BDA7CE4A23D466DA00BB5AEB /* IntroductionView.h */,
+				BDA7CE3F23D466DA00BB5AEB /* IntroductionView.m */,
+				BDA7CE4C23D466DA00BB5AEB /* UIView+LHAutoLayout.h */,
+				BDA7CE4023D466DA00BB5AEB /* UIView+LHAutoLayout.m */,
+				BDA7CE4123D466DA00BB5AEB /* LHAlertController+TransitionAnimate.m */,
+				BDA7CE4223D466DA00BB5AEB /* LHAlertController.h */,
+				BDA7CE4B23D466DA00BB5AEB /* LHAlertController.m */,
+				BDA7CE3B23D466DA00BB5AEB /* OptionView.h */,
+				BDA7CE4823D466DA00BB5AEB /* OptionView.m */,
+				BDA7CE3A23D466DA00BB5AEB /* TYShowAlertView.h */,
+				BDA7CE4923D466DA00BB5AEB /* TYShowAlertView.m */,
+				BDA7CE4D23D466DA00BB5AEB /* LHAlert.h */,
+			);
+			path = LMAlertController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9361708123A361D400FEDD62 /* WKTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9361709B23A361DA00FEDD62 /* Build configuration list for PBXNativeTarget "WKTest" */;
+			buildPhases = (
+				9361707E23A361D400FEDD62 /* Sources */,
+				9361707F23A361D400FEDD62 /* Frameworks */,
+				9361708023A361D400FEDD62 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WKTest;
+			productName = WKTest;
+			productReference = 9361708223A361D400FEDD62 /* WKTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9361707A23A361D400FEDD62 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1110;
+				ORGANIZATIONNAME = chenshuang;
+				TargetAttributes = {
+					9361708123A361D400FEDD62 = {
+						CreatedOnToolsVersion = 11.1;
+					};
+				};
+			};
+			buildConfigurationList = 9361707D23A361D400FEDD62 /* Build configuration list for PBXProject "WKTest" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9361707923A361D400FEDD62;
+			productRefGroup = 9361708323A361D400FEDD62 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9361708123A361D400FEDD62 /* WKTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9361708023A361D400FEDD62 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9361709523A361DA00FEDD62 /* LaunchScreen.storyboard in Resources */,
+				9361709223A361DA00FEDD62 /* Assets.xcassets in Resources */,
+				9361709023A361D500FEDD62 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9361707E23A361D400FEDD62 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9361708D23A361D500FEDD62 /* ViewController.m in Sources */,
+				BDA7CE5523D466DA00BB5AEB /* LHAlertView.m in Sources */,
+				BDA7CE5723D466DA00BB5AEB /* TYShowAlertView.m in Sources */,
+				BDA7CE4F23D466DA00BB5AEB /* IntroductionView.m in Sources */,
+				BD85F3DF23BB34E600AFDEFF /* AViewController.m in Sources */,
+				BDA7CE5123D466DA00BB5AEB /* LHAlertController+TransitionAnimate.m in Sources */,
+				BDA7CE5423D466DA00BB5AEB /* LHAlertFadeAnimation.m in Sources */,
+				9361708723A361D500FEDD62 /* AppDelegate.m in Sources */,
+				9361709823A361DA00FEDD62 /* main.m in Sources */,
+				BDA7CE5223D466DA00BB5AEB /* LHBaseAnimation.m in Sources */,
+				9361708A23A361D500FEDD62 /* SceneDelegate.m in Sources */,
+				BDA7CE5323D466DA00BB5AEB /* UIView+LHAlertView.m in Sources */,
+				BDA7CE5023D466DA00BB5AEB /* UIView+LHAutoLayout.m in Sources */,
+				BDA7CE5823D466DA00BB5AEB /* LHAlertController.m in Sources */,
+				BDA7CE5623D466DA00BB5AEB /* OptionView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9361708E23A361D500FEDD62 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9361708F23A361D500FEDD62 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9361709323A361DA00FEDD62 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9361709423A361DA00FEDD62 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9361709923A361DA00FEDD62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		9361709A23A361DA00FEDD62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9361709C23A361DA00FEDD62 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K9KT8N67YP;
+				INFOPLIST_FILE = WKTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lumiunited.pre.homekit.WKTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9361709D23A361DA00FEDD62 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K9KT8N67YP;
+				INFOPLIST_FILE = WKTest/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lumiunited.pre.homekit.WKTest;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9361707D23A361D400FEDD62 /* Build configuration list for PBXProject "WKTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9361709923A361DA00FEDD62 /* Debug */,
+				9361709A23A361DA00FEDD62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9361709B23A361DA00FEDD62 /* Build configuration list for PBXNativeTarget "WKTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9361709C23A361DA00FEDD62 /* Debug */,
+				9361709D23A361DA00FEDD62 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9361707A23A361D400FEDD62 /* Project object */;
+}
